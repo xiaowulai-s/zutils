@@ -1,38 +1,28 @@
-'use client'
-
-import { useMemo } from 'react'
-import type { FrequencyPoint } from '@/lib/calculations/filter'
-
 interface FrequencyChartProps {
-  data: FrequencyPoint[]
+  data: Array<{ frequency: number; magnitude: number; phase: number }>
   type: 'magnitude' | 'phase'
 }
 
 export function FrequencyChart({ data, type }: FrequencyChartProps) {
-  const chartData = useMemo(() => {
-    if (!data || data.length === 0) return []
-    
-    if (type === 'magnitude') {
-      return data.map(d => ({
-        x: Math.log10(Math.max(d.frequency, 1)),
-        y: 20 * Math.log10(Math.max(d.magnitude, 0.0001)),
-        label: d.frequency
-      }))
-    }
-    return data.map(d => ({
-      x: Math.log10(Math.max(d.frequency, 1)),
-      y: d.phase,
-      label: d.frequency
-    }))
-  }, [data, type])
-  
-  if (chartData.length === 0) {
+  if (!data || data.length === 0) {
     return (
       <div className="w-full h-48 flex items-center justify-center text-muted-foreground">
         暂无数据
       </div>
     )
   }
+  
+  const chartData = type === 'magnitude' 
+    ? data.map(d => ({
+        x: Math.log10(Math.max(d.frequency, 1)),
+        y: 20 * Math.log10(Math.max(d.magnitude, 0.0001)),
+        label: d.frequency
+      }))
+    : data.map(d => ({
+        x: Math.log10(Math.max(d.frequency, 1)),
+        y: d.phase,
+        label: d.frequency
+      }))
   
   const minY = Math.min(...chartData.map(d => d.y))
   const maxY = Math.max(...chartData.map(d => d.y))
@@ -57,13 +47,6 @@ export function FrequencyChart({ data, type }: FrequencyChartProps) {
   return (
     <div className="w-full">
       <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-auto">
-        <defs>
-          <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="var(--primary)" />
-            <stop offset="100%" stopColor="var(--primary)" stopOpacity="0.5" />
-          </linearGradient>
-        </defs>
-        
         <rect
           x={padding.left}
           y={padding.top}
@@ -85,7 +68,7 @@ export function FrequencyChart({ data, type }: FrequencyChartProps) {
         <path
           d={pathD}
           fill="none"
-          stroke="url(#lineGradient)"
+          stroke="var(--primary)"
           strokeWidth="2"
         />
         
@@ -115,14 +98,14 @@ export function FrequencyChart({ data, type }: FrequencyChartProps) {
           transform={`rotate(-90, 15, ${padding.top + chartHeight / 2})`}
           className="text-xs fill-muted-foreground"
         >
-          {type === 'magnitude' ? '增益 (dB)' : '相位 (°)'}
+          {type === 'magnitude' ? '增益' : '相位 (°)'}
         </text>
       </svg>
       
       <div className="flex justify-between text-xs text-muted-foreground mt-2 px-12">
         {chartData.slice(0, 5).map((d, i) => (
           <span key={i}>
-            {d.label < 1000 ? `${d.label.toFixed(0)} Hz` : `${(d.label / 1000).toFixed(0)} kHz`}
+            {d.label < 1000 ? `${Math.round(d.label)} Hz` : `${Math.round(d.label / 1000)} kHz`}
           </span>
         ))}
       </div>
