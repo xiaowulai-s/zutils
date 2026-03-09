@@ -13,19 +13,23 @@ export function FrequencyChart({ data, type }: FrequencyChartProps) {
   }
   
   const chartData = type === 'magnitude' 
-    ? data.map(d => ({
-        x: Math.log10(Math.max(d.frequency, 1)),
-        y: 20 * Math.log10(Math.max(d.magnitude, 0.0001)),
-        label: d.frequency
-      }))
-    : data.map(d => ({
-        x: Math.log10(Math.max(d.frequency, 1)),
-        y: d.phase,
-        label: d.frequency
-      }))
+    ? data.map(function(d) {
+        return {
+          x: Math.log10(Math.max(d.frequency, 1)),
+          y: 20 * Math.log10(Math.max(d.magnitude, 0.0001)),
+          label: d.frequency
+        }
+      })
+    : data.map(function(d) {
+        return {
+          x: Math.log10(Math.max(d.frequency, 1)),
+          y: d.phase,
+          label: d.frequency
+        }
+      })
   
-  const minY = Math.min(...chartData.map(d => d.y))
-  const maxY = Math.max(...chartData.map(d => d.y))
+  const minY = Math.min.apply(chartData, function(d) { return d.y })
+  const maxY = Math.max.apply(chartData, function(d) { return d.y })
   const rangeY = maxY - minY || 1
   
   const width = 400
@@ -36,17 +40,23 @@ export function FrequencyChart({ data, type }: FrequencyChartProps) {
   
   const divisor = chartData.length > 1 ? chartData.length - 1 : 1
   
-  const points = chartData.map((d, i) => ({
-    x: padding.left + (i / divisor) * chartWidth,
-    y: padding.top + chartHeight - ((d.y - minY) / rangeY) * chartHeight,
-    ...d
-  }))
+  const points: Array<{ x: number; y: number; label: number }> = []
+  for (let i = 0; i < chartData.length; i++) {
+    const d = chartData[i]
+    points.push({
+      x: padding.left + (i / divisor) * chartWidth,
+      y: padding.top + chartHeight - ((d.y - minY) / rangeY) * chartHeight,
+      label: d.label
+    })
+  }
   
-  const pathD = points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ')
+  const pathD = points.map(function(p, i) {
+    return (i === 0 ? 'M' : 'L') + ' ' + p.x + ' ' + p.y
+  }).join(' ')
   
   return (
     <div className="w-full">
-      <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-auto">
+      <svg viewBox={'0 0 '.concat(width, ' ').concat(height')} className="w-full h-auto">
         <rect
           x={padding.left}
           y={padding.top}
@@ -72,15 +82,17 @@ export function FrequencyChart({ data, type }: FrequencyChartProps) {
           strokeWidth="2"
         />
         
-        {points.map((p, i) => (
-          <circle
-            key={i}
-            cx={p.x}
-            cy={p.y}
-            r="4"
-            fill="var(--primary)"
-          />
-        ))}
+        {points.map(function(p, i) {
+          return (
+            <circle
+              key={i}
+              cx={p.x}
+              cy={p.y}
+              r="4"
+              fill="var(--primary)"
+            />
+          )
+        })}
         
         <text
           x={padding.left + chartWidth / 2}
@@ -95,7 +107,7 @@ export function FrequencyChart({ data, type }: FrequencyChartProps) {
           x={15}
           y={padding.top + chartHeight / 2}
           textAnchor="middle"
-          transform={`rotate(-90, 15, ${padding.top + chartHeight / 2})`}
+          transform={'rotate(-90, 15, '.concat(padding.top + chartHeight / 2, ')')}
           className="text-xs fill-muted-foreground"
         >
           {type === 'magnitude' ? '增益' : '相位 (°)'}
@@ -103,11 +115,13 @@ export function FrequencyChart({ data, type }: FrequencyChartProps) {
       </svg>
       
       <div className="flex justify-between text-xs text-muted-foreground mt-2 px-12">
-        {chartData.slice(0, 5).map((d, i) => (
-          <span key={i}>
-            {d.label < 1000 ? `${Math.round(d.label)} Hz` : `${Math.round(d.label / 1000)} kHz`}
-          </span>
-        ))}
+        {points.slice(0, 5).map(function(p, i) {
+          return (
+            <span key={i}>
+              {p.label < 1000 ? ''.concat(Math.round(p.label), ' Hz') : ''.concat(Math.round(p.label / 1000), ' kHz')}
+            </span>
+          )
+        })}
       </div>
     </div>
   )
