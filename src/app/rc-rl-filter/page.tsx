@@ -161,7 +161,6 @@ export default function RcRlFilterPage() {
                 <FrequencyChart
                   data={result.frequencyResponse}
                   type="magnitude"
-                  cutoffFrequency={result.cutoffFrequency}
                 />
               </div>
             </div>
