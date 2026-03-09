@@ -7,9 +7,9 @@ export function Footer() {
       <div className="container py-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <h3 className="font-semibold mb-3">小智学长工具集</h3>
+            <h3 className="font-semibold mb-3">开发工具箱</h3>
             <p className="text-sm text-muted-foreground">
-              开发者工具箱，提供各类电子工程计算工具
+              提供各类电子工程计算工具
             </p>
           </div>
           
@@ -42,7 +42,7 @@ export function Footer() {
         </div>
         
         <div className="mt-8 pt-8 border-t text-center text-sm text-muted-foreground">
-          <p>© 2024 小智学长工具集. All rights reserved.</p>
+          <p>© 2024 开发工具箱. All rights reserved.</p>
         </div>
       </div>
     </footer>

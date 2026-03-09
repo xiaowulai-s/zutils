@@ -19,7 +19,7 @@ export function Header() {
       <div className="container flex h-16 items-center justify-between">
         <Link href="/" className="flex items-center space-x-2">
           <Zap className="h-6 w-6 text-primary" />
-          <span className="text-xl font-bold">小智学长工具集</span>
+          <span className="text-xl font-bold">开发工具箱</span>
         </Link>
         
         <nav className="hidden md:flex items-center space-x-6">

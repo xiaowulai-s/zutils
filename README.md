@@ -1,8 +1,8 @@
-# 小智学长工具集 - 开发者工具箱
+# 开发工具箱
 
 > 提供 PCB 设计、电路计算、电子元器件选型等专业工具，助力硬件开发
 
-🌐 **在线访问**: [https://zutils.cn](https://zutils.cn)
+🌐 **在线访问**: [https://xiaowulai-s.github.io/zutils](https://xiaowulai-s.github.io/zutils)
 
 ## ✨ 功能特性
 
@@ -21,7 +21,7 @@
 
 ## 🛠️ 技术栈
 
-- **框架**: [Next.js 15](https://nextjs.org/) (App Router)
+- **框架**: [Next.js 15](https://nextjs.org/) (App Router + 静态导出)
 - **语言**: [TypeScript](https://www.typescriptlang.org/)
 - **样式**: [Tailwind CSS](https://tailwindcss.com/)
 - **图标**: [Lucide React](https://lucide.dev/)
@@ -70,10 +70,6 @@ zutils/
 
 ```bash
 npm install
-# 或
-yarn install
-# 或
-pnpm install
 ```
 
 ### 开发模式
@@ -84,12 +80,13 @@ npm run dev
 
 访问 [http://localhost:3000](http://localhost:3000) 查看应用。
 
-### 构建生产版本
+### 构建静态版本
 
 ```bash
 npm run build
-npm start
 ```
+
+静态文件将输出到 `out` 目录。
 
 ## 🏗️ 架构设计
 
@@ -123,6 +120,19 @@ PCB 过孔和走线电流计算基于 IPC-2152 标准，这是目前业界公认
 - 最大电流: `I = k × A^0.44 × (ΔT/10)^0.5`
 - 电阻: `R = ρ × L / A`
 
+## 🚢 部署
+
+### GitHub Pages
+
+项目已配置 GitHub Actions 自动部署到 GitHub Pages。
+
+每次推送到 `main` 分支，会自动构建并部署。
+
+### 手动部署
+
+1. 构建静态文件: `npm run build`
+2. 将 `out` 目录内容部署到任意静态托管服务
+
 ## 🤝 贡献指南
 
 欢迎提交 Issue 和 Pull Request！
@@ -143,7 +153,3 @@ PCB 过孔和走线电流计算基于 IPC-2152 标准，这是目前业界公认
 - [Next.js](https://nextjs.org/) - React 框架
 - [Tailwind CSS](https://tailwindcss.com/) - CSS 框架
 - [Lucide](https://lucide.dev/) - 图标库
-
----
-
-Made with ❤️ by [小智学长](https://github.com/xiaowulai-s)
