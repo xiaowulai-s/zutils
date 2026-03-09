@@ -1,5 +1,5 @@
 import { ToolCard } from '@/components/tools'
-import { tools, toolsByCategory } from '@/config/tools'
+import { toolsByCategory } from '@/config/tools'
 import { Search, Sparkles } from 'lucide-react'
 
 export default function HomePage() {
@@ -7,7 +7,7 @@ export default function HomePage() {
     <div className="container py-8">
       <section className="text-center mb-12">
         <h1 className="text-4xl font-bold mb-4">
-          开发者工具箱
+          开发工具箱
         </h1>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
           提供 PCB 设计、电路计算、电子元器件选型等专业工具，助力硬件开发

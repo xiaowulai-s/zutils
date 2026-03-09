@@ -6,10 +6,9 @@ import type { FrequencyPoint } from '@/lib/calculations/filter'
 interface FrequencyChartProps {
   data: FrequencyPoint[]
   type: 'magnitude' | 'phase'
-  cutoffFrequency: number
 }
 
-export function FrequencyChart({ data, type, cutoffFrequency }: FrequencyChartProps) {
+export function FrequencyChart({ data, type }: FrequencyChartProps) {
   const chartData = useMemo(() => {
     if (type === 'magnitude') {
       return data.map(d => ({

@@ -19,7 +19,7 @@ export default function SmdResistorPage() {
       const res = decodeSMDResistor({ code: code.trim() })
       setResult(res)
       setError('')
-    } catch (e) {
+    } catch {
       setError('无效的丝印代码格式')
       setResult(null)
     }

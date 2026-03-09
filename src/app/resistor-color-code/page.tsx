@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Card, Button, Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui'
+import { Card, Button, Tabs, TabsList, TabsTrigger } from '@/components/ui'
 import { ColorBandPicker } from '@/components/tools'
 import { calculateResistorFromColors, formatResistance, type ColorCodeResult } from '@/lib/calculations/resistor'
 
@@ -27,7 +27,7 @@ export default function ResistorColorCodePage() {
         ? { band1: colors.band1, band2: colors.band2, band3: colors.band3, multiplier: colors.multiplier, tolerance: colors.tolerance }
         : { ...colors }
       
-      const res = calculateResistorFromColors(input as any)
+      const res = calculateResistorFromColors(input as Parameters<typeof calculateResistorFromColors>[0])
       setResult(res)
     } catch (error) {
       console.error(error)

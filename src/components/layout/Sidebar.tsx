@@ -7,9 +7,9 @@ import {
   Zap, 
   Battery, 
   Lightbulb, 
-  Resistor,
+  Circle,
   Filter,
-  FileBinary,
+  FileCode,
   BookOpen,
   Microchip
 } from 'lucide-react'
@@ -21,9 +21,9 @@ const iconMap: Record<string, React.ReactNode> = {
   'zap': <Zap className="h-4 w-4" />,
   'battery': <Battery className="h-4 w-4" />,
   'lightbulb': <Lightbulb className="h-4 w-4" />,
-  'resistor': <Resistor className="h-4 w-4" />,
+  'resistor': <Circle className="h-4 w-4" />,
   'filter': <Filter className="h-4 w-4" />,
-  'file-binary': <FileBinary className="h-4 w-4" />,
+  'file-binary': <FileCode className="h-4 w-4" />,
   'book-open': <BookOpen className="h-4 w-4" />,
   'microchip': <Microchip className="h-4 w-4" />,
 }

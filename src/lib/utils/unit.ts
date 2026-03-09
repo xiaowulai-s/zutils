@@ -19,7 +19,7 @@ export function convertUnit(value: number, fromUnit: string, toUnit: string): nu
   return value * fromFactor / toFactor
 }
 
-export function getBestUnit(value: number, baseUnit: string): { value: number; prefix: string } {
+export function getBestUnit(value: number): { value: number; prefix: string } {
   const prefixes = ['p', 'n', 'μ', 'm', '', 'k', 'M', 'G', 'T']
   const factors = [1e12, 1e9, 1e6, 1e3, 1, 1e-3, 1e-6, 1e-9, 1e-12]
   

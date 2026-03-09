@@ -1,7 +1,6 @@
 'use client'
 
-import { useState, useRef, useCallback, useEffect } from 'react'
-import { cn } from '@/lib/utils/cn'
+import { useState, useRef, useCallback } from 'react'
 
 interface HexViewerProps {
   data: Uint8Array | null

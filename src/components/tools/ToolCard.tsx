@@ -5,9 +5,9 @@ import {
   Zap, 
   Battery, 
   Lightbulb, 
-  Resistor,
+  Circle,
   Filter,
-  FileBinary,
+  FileCode,
   BookOpen,
   Microchip,
   ChevronRight
@@ -21,9 +21,9 @@ const iconMap: Record<string, React.ReactNode> = {
   'zap': <Zap className="h-6 w-6" />,
   'battery': <Battery className="h-6 w-6" />,
   'lightbulb': <Lightbulb className="h-6 w-6" />,
-  'resistor': <Resistor className="h-6 w-6" />,
+  'resistor': <Circle className="h-6 w-6" />,
   'filter': <Filter className="h-6 w-6" />,
-  'file-binary': <FileBinary className="h-6 w-6" />,
+  'file-binary': <FileCode className="h-6 w-6" />,
   'book-open': <BookOpen className="h-6 w-6" />,
   'microchip': <Microchip className="h-6 w-6" />,
 }

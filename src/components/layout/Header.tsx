@@ -3,7 +3,6 @@
 import Link from 'next/link'
 import { Menu, X, Zap } from 'lucide-react'
 import { useState } from 'react'
-import { cn } from '@/lib/utils/cn'
 
 const navItems = [
   { label: '硬件/PCB', href: '/#pcb' },
