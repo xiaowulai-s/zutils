@@ -10,19 +10,29 @@ interface FrequencyChartProps {
 
 export function FrequencyChart({ data, type }: FrequencyChartProps) {
   const chartData = useMemo(() => {
+    if (!data || data.length === 0) return []
+    
     if (type === 'magnitude') {
       return data.map(d => ({
-        x: Math.log10(d.frequency),
-        y: 20 * Math.log10(d.magnitude),
+        x: Math.log10(Math.max(d.frequency, 1)),
+        y: 20 * Math.log10(Math.max(d.magnitude, 0.0001)),
         label: d.frequency
       }))
     }
     return data.map(d => ({
-      x: Math.log10(d.frequency),
+      x: Math.log10(Math.max(d.frequency, 1)),
       y: d.phase,
       label: d.frequency
     }))
   }, [data, type])
+  
+  if (chartData.length === 0) {
+    return (
+      <div className="w-full h-48 flex items-center justify-center text-muted-foreground">
+        暂无数据
+      </div>
+    )
+  }
   
   const minY = Math.min(...chartData.map(d => d.y))
   const maxY = Math.max(...chartData.map(d => d.y))
@@ -34,8 +44,10 @@ export function FrequencyChart({ data, type }: FrequencyChartProps) {
   const chartWidth = width - padding.left - padding.right
   const chartHeight = height - padding.top - padding.bottom
   
+  const divisor = chartData.length > 1 ? chartData.length - 1 : 1
+  
   const points = chartData.map((d, i) => ({
-    x: padding.left + (i / (chartData.length - 1)) * chartWidth,
+    x: padding.left + (i / divisor) * chartWidth,
     y: padding.top + chartHeight - ((d.y - minY) / rangeY) * chartHeight,
     ...d
   }))
@@ -103,7 +115,7 @@ export function FrequencyChart({ data, type }: FrequencyChartProps) {
           transform={`rotate(-90, 15, ${padding.top + chartHeight / 2})`}
           className="text-xs fill-muted-foreground"
         >
-          {type === 'magnitude' ? '增益' : '相位 (°)'}
+          {type === 'magnitude' ? '增益 (dB)' : '相位 (°)'}
         </text>
       </svg>
       
