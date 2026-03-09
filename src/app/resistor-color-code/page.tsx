@@ -1,9 +1,9 @@
 'use client'
 
 import { useState } from 'react'
-import { Card, Button, Tabs, TabsList, TabsTrigger } from '@/components/ui'
-import { ColorBandPicker } from '@/components/tools'
-import { calculateResistorFromColors, formatResistance, type ColorCodeResult } from '@/lib/calculations/resistor'
+import { Card, Button } from '@/components/ui'
+import { calculateResistorFromColors, formatResistance, COLOR_BANDS, type ColorCodeResult } from '@/lib/calculations/resistor'
+import { cn } from '@/lib/utils/cn'
 
 type BandCount = 4 | 5 | 6
 
@@ -46,6 +46,55 @@ export default function ResistorColorCodePage() {
     setResult(null)
   }
   
+  const getColorPicker = (
+    label: string,
+    value: string,
+    onChange: (color: string) => void,
+    type: 'digit' | 'multiplier' | 'tolerance' | 'tempCoeff',
+    excludeColors: string[] = []
+  ) => {
+    const availableColors = COLOR_BANDS.filter((band) => {
+      if (excludeColors.includes(band.color)) return false
+      if (type === 'digit' && band.value === null) return false
+      if (type === 'multiplier' && band.multiplier === null) return false
+      if (type === 'tolerance' && band.tolerance === null) return false
+      if (type === 'tempCoeff' && band.tempCoeff === null) return false
+      return true
+    })
+    
+    return (
+      <div className="space-y-2">
+        <label className="block text-sm font-medium text-foreground">{label}</label>
+        <div className="flex flex-wrap gap-2">
+          {availableColors.map((band) => (
+            <button
+              key={band.color}
+              type="button"
+              onClick={() => onChange(band.color)}
+              className={cn(
+                'w-8 h-8 rounded-md border-2 transition-all',
+                value === band.color
+                  ? 'border-primary ring-2 ring-primary ring-offset-2'
+                  : 'border-transparent hover:border-gray-300'
+              )}
+              style={{ backgroundColor: band.hex }}
+              title={band.color}
+            />
+          ))}
+        </div>
+        {value && (
+          <div className="flex items-center gap-2 mt-2">
+            <div
+              className="w-6 h-6 rounded border"
+              style={{ backgroundColor: COLOR_BANDS.find(b => b.color === value)?.hex }}
+            />
+            <span className="text-sm text-muted-foreground">{value}</span>
+          </div>
+        )}
+      </div>
+    )
+  }
+  
   return (
     <div className="container py-8">
       <div className="mb-8">
@@ -56,62 +105,67 @@ export default function ResistorColorCodePage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card title="选择色环">
           <div className="space-y-6">
-            <Tabs defaultValue="5" onValueChange={(v) => setBandCount(parseInt(v) as BandCount)}>
-              <TabsList>
-                <TabsTrigger value="4">4环</TabsTrigger>
-                <TabsTrigger value="5">5环</TabsTrigger>
-                <TabsTrigger value="6">6环</TabsTrigger>
-              </TabsList>
-            </Tabs>
+            <div className="flex gap-2">
+              {([4, 5, 6] as BandCount[]).map((count) => (
+                <button
+                  key={count}
+                  onClick={() => setBandCount(count)}
+                  className={cn(
+                    'px-4 py-2 text-sm font-medium rounded-md transition-colors',
+                    bandCount === count
+                      ? 'bg-primary text-primary-foreground'
+                      : 'bg-muted text-muted-foreground hover:bg-muted/80'
+                  )}
+                >
+                  {count}环
+                </button>
+              ))}
+            </div>
             
             <div className="space-y-4">
-              <ColorBandPicker
-                label="第一环"
-                type="digit"
-                value={colors.band1}
-                onChange={(color) => setColors({ ...colors, band1: color })}
-                excludeColors={['黑色', '金色', '银色']}
-              />
-              
-              <ColorBandPicker
-                label="第二环"
-                type="digit"
-                value={colors.band2}
-                onChange={(color) => setColors({ ...colors, band2: color })}
-                excludeColors={['金色', '银色']}
-              />
-              
-              {(bandCount === 5 || bandCount === 6) && (
-                <ColorBandPicker
-                  label="第三环"
-                  type="digit"
-                  value={colors.band3}
-                  onChange={(color) => setColors({ ...colors, band3: color })}
-                  excludeColors={['金色', '银色']}
-                />
+              {getColorPicker(
+                '第一环',
+                colors.band1,
+                (color) => setColors({ ...colors, band1: color }),
+                'digit',
+                ['黑色', '金色', '银色']
               )}
               
-              <ColorBandPicker
-                label="倍率环"
-                type="multiplier"
-                value={colors.multiplier}
-                onChange={(color) => setColors({ ...colors, multiplier: color })}
-              />
+              {getColorPicker(
+                '第二环',
+                colors.band2,
+                (color) => setColors({ ...colors, band2: color }),
+                'digit',
+                ['金色', '银色']
+              )}
               
-              <ColorBandPicker
-                label="误差环"
-                type="tolerance"
-                value={colors.tolerance}
-                onChange={(color) => setColors({ ...colors, tolerance: color })}
-              />
+              {(bandCount === 5 || bandCount === 6) && getColorPicker(
+                '第三环',
+                colors.band3,
+                (color) => setColors({ ...colors, band3: color }),
+                'digit',
+                ['金色', '银色']
+              )}
               
-              {bandCount === 6 && (
-                <ColorBandPicker
-                  label="温度系数环"
-                  type="tempCoeff"
-                  value={colors.tempCoeff}
-                  onChange={(color) => setColors({ ...colors, tempCoeff: color })}
-                />
+              {getColorPicker(
+                '倍率环',
+                colors.multiplier,
+                (color) => setColors({ ...colors, multiplier: color }),
+                'multiplier'
+              )}
+              
+              {getColorPicker(
+                '误差环',
+                colors.tolerance,
+                (color) => setColors({ ...colors, tolerance: color }),
+                'tolerance'
+              )}
+              
+              {bandCount === 6 && getColorPicker(
+                '温度系数环',
+                colors.tempCoeff,
+                (color) => setColors({ ...colors, tempCoeff: color }),
+                'tempCoeff'
               )}
             </div>
             
