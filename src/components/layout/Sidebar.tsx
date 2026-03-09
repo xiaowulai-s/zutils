@@ -1,7 +1,6 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 import { 
   Cpu, 
   CircuitBoard, 
@@ -14,7 +13,6 @@ import {
   BookOpen,
   Microchip
 } from 'lucide-react'
-import { cn } from '@/lib/utils/cn'
 import { tools } from '@/config/tools'
 
 const iconMap: Record<string, React.ReactNode> = {
@@ -31,8 +29,6 @@ const iconMap: Record<string, React.ReactNode> = {
 }
 
 export function Sidebar() {
-  const pathname = usePathname()
-  
   const categories = tools.reduce((acc, tool) => {
     if (!acc[tool.category.id]) {
       acc[tool.category.id] = {
@@ -59,12 +55,7 @@ export function Sidebar() {
                 <Link
                   key={tool.id}
                   href={tool.path}
-                  className={cn(
-                    'flex items-center gap-2 px-2 py-1.5 text-sm rounded-md transition-colors',
-                    pathname === tool.path
-                      ? 'bg-primary text-primary-foreground'
-                      : 'text-muted-foreground hover:bg-muted hover:text-foreground'
-                  )}
+                  className="flex items-center gap-2 px-2 py-1.5 text-sm rounded-md transition-colors text-muted-foreground hover:bg-muted hover:text-foreground"
                 >
                   {iconMap[tool.icon]}
                   {tool.name}
