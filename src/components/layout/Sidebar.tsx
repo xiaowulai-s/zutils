@@ -46,7 +46,8 @@ import {
   Contrast,
   ImageDown,
   Shuffle,
-  TextCursor
+  TextCursor,
+  Server
 } from 'lucide-react'
 import { tools } from '@/config/tools'
 
@@ -99,6 +100,7 @@ const iconMap: Record<string, React.ReactNode> = {
   'shuffle': <Shuffle className="h-4 w-4" />,
   'text-cursor': <TextCursor className="h-4 w-4" />,
   'file-code': <FileCode className="h-4 w-4" />,
+  'server': <Server className="h-4 w-4" />,
 }
 
 export function Sidebar() {

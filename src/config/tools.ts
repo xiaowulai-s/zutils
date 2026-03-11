@@ -397,6 +397,78 @@ export const tools: ToolMeta[] = [
     path: '/datasheet',
     keywords: ['datasheet', '数据手册', '芯片', '规格书']
   },
+  {
+    id: 'code-sandbox',
+    name: '代码运行沙箱',
+    description: '在浏览器中安全运行 JavaScript/TypeScript/Python 代码',
+    category: { id: 'dev', name: '开发工具', icon: 'code' },
+    icon: 'terminal',
+    path: '/code-sandbox',
+    keywords: ['代码', '运行', '沙箱', 'JavaScript', 'Python']
+  },
+  {
+    id: 'api-mock',
+    name: 'API Mock 服务器',
+    description: '创建模拟 API 端点，用于前端开发和测试',
+    category: { id: 'serial', name: '串口/网络调试', icon: 'terminal' },
+    icon: 'server',
+    path: '/api-mock',
+    keywords: ['API', 'Mock', '模拟', '测试', '端点']
+  },
+  {
+    id: 'pdf-tools',
+    name: 'PDF 工具套件',
+    description: 'PDF 合并、拆分、压缩，PDF 转图片',
+    category: { id: 'design', name: '设计工具', icon: 'palette' },
+    icon: 'file-text',
+    path: '/pdf-tools',
+    keywords: ['PDF', '合并', '拆分', '压缩', '转图片']
+  },
+  {
+    id: 'image-processor',
+    name: '图片处理工具',
+    description: '图片裁剪、旋转、翻转、调整亮度/对比度/饱和度',
+    category: { id: 'design', name: '设计工具', icon: 'palette' },
+    icon: 'image',
+    path: '/image-processor',
+    keywords: ['图片', '裁剪', '旋转', '调整', '处理']
+  },
+  {
+    id: 'regex-visualizer',
+    name: '正则表达式可视化',
+    description: '图形化解析正则表达式，帮助理解复杂模式',
+    category: { id: 'dev', name: '开发工具', icon: 'code' },
+    icon: 'regex',
+    path: '/regex-visualizer',
+    keywords: ['正则', '可视化', '解析', '图形']
+  },
+  {
+    id: 'json-schema',
+    name: 'JSON Schema 生成器',
+    description: '从 JSON 数据自动生成 JSON Schema',
+    category: { id: 'dev', name: '开发工具', icon: 'code' },
+    icon: 'braces',
+    path: '/json-schema',
+    keywords: ['JSON', 'Schema', '生成器', '校验']
+  },
+  {
+    id: 'encryption',
+    name: '加密解密工具',
+    description: 'AES 加密解密，支持自定义密钥',
+    category: { id: 'crc', name: 'CRC/校验计算', icon: 'shield-check' },
+    icon: 'lock',
+    path: '/encryption',
+    keywords: ['加密', '解密', 'AES', '密钥', '安全']
+  },
+  {
+    id: 'code-converter',
+    name: '代码转换器',
+    description: 'JSON/YAML/CSV/TypeScript/JavaScript 格式互转',
+    category: { id: 'dev', name: '开发工具', icon: 'code' },
+    icon: 'arrow-right-left',
+    path: '/code-converter',
+    keywords: ['转换', 'JSON', 'YAML', 'CSV', 'TypeScript']
+  },
 ]
 
 export const toolsByCategory = tools.reduce((acc, tool) => {

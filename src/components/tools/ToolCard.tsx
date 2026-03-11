@@ -40,7 +40,8 @@ import {
   Contrast,
   ImageDown,
   Shuffle,
-  TextCursor
+  TextCursor,
+  Server
 } from 'lucide-react'
 import { Card } from '@/components/ui'
 import type { ToolMeta } from '@/types'
@@ -87,6 +88,7 @@ const iconMap: Record<string, React.ReactNode> = {
   'text-cursor': <TextCursor className="h-6 w-6" />,
   'file-code': <FileCode className="h-6 w-6" />,
   'code': <FileCode className="h-6 w-6" />,
+  'server': <Server className="h-6 w-6" />,
 }
 
 interface ToolCardProps {

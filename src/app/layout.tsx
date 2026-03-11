@@ -3,6 +3,7 @@ import './globals.css'
 import { Header, Footer } from '@/components/layout'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import { UserPreferencesProvider } from '@/components/UserPreferences'
+import { ServiceWorkerRegistration } from '@/components/ServiceWorkerRegistration'
 
 export const metadata: Metadata = {
   title: '开发工具箱 - 电子工程师的在线工具集',
@@ -39,6 +40,7 @@ export default function RootLayout({
               </main>
               <Footer />
             </div>
+            <ServiceWorkerRegistration />
           </UserPreferencesProvider>
         </ThemeProvider>
       </body>
