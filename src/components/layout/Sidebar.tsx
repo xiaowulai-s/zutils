@@ -35,7 +35,13 @@ import {
   Link2,
   Star,
   History,
-  Heart
+  Heart,
+  Ruler,
+  Fingerprint,
+  KeyRound,
+  Code2,
+  Database,
+  GitBranch
 } from 'lucide-react'
 import { tools } from '@/config/tools'
 
@@ -76,6 +82,12 @@ const iconMap: Record<string, React.ReactNode> = {
   'star': <Star className="h-4 w-4" />,
   'history': <History className="h-4 w-4" />,
   'heart': <Heart className="h-4 w-4" />,
+  'ruler': <Ruler className="h-4 w-4" />,
+  'fingerprint': <Fingerprint className="h-4 w-4" />,
+  'key-round': <KeyRound className="h-4 w-4" />,
+  'code-2': <Code2 className="h-4 w-4" />,
+  'database': <Database className="h-4 w-4" />,
+  'git-branch': <GitBranch className="h-4 w-4" />,
 }
 
 export function Sidebar() {

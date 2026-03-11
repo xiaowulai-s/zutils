@@ -1,155 +1,108 @@
 # 开发工具箱
 
-> 提供 PCB 设计、电路计算、电子元器件选型等专业工具，助力硬件开发
+一个功能丰富的在线工具集，专为电子工程师和开发者设计。
 
-🌐 **在线访问**: [https://xiaowulai-s.github.io/zutils](https://xiaowulai-s.github.io/zutils)
-
-## ✨ 功能特性
+## 功能概览
 
 ### 硬件/PCB 工具
+- **PCB 过孔电流计算器** - 基于 IPC-2152 标准
+- **PCB 走线宽度计算器** - 基于 IPC-2152 标准
+- **二进制文件查看器** - 十六进制和 ASCII 视图
+- **电池续航计算器** - 功耗和寿命计算
+- **LED 限流电阻计算器** - 支持串并联配置
+- **电阻色环阻值计算器** - 4/5/6 环电阻
+- **SMD 电阻丝印助手** - 三位、四位及 EIA-96 编码
+- **RC/RL 滤波器计算器** - 低通与高通滤波器
 
-| 工具 | 描述 |
-|------|------|
-| [PCB 过孔电流计算器](/pcb-via-current) | 基于 IPC-2152 标准，计算过孔最大电流、电阻、压降等参数 |
-| [PCB 走线宽度计算器](/pcb-trace-width) | 基于 IPC-2152 标准，根据电流计算所需走线宽度 |
-| [电阻色环阻值计算器](/resistor-color-code) | 支持 4/5/6 环电阻的色环阻值、容差及温度系数计算 |
-| [SMD 电阻丝印助手](/smd-resistor) | 解析三位、四位及 EIA-96 编码的贴片电阻丝印代码 |
-| [LED 限流电阻计算器](/led-resistor) | 计算 LED 限流电阻值，支持串并联配置，E24 标准电阻推荐 |
-| [电池续航计算器](/battery-life) | 计算电池使用寿命，支持恒定功耗和间歇性功耗两种模式 |
-| [RC/RL 滤波器计算器](/rc-rl-filter) | 低通与高通滤波器计算，支持 RC 和 RL 电路模式，实时幅频响应曲线 |
-| [二进制文件查看器](/binary-viewer) | 在线查看二进制文件，十六进制和 ASCII 视图，支持大文件虚拟滚动 |
+### 嵌入式开发
+- **ESP32 在线烧录** - Web Flash 工具
+- **电路在线仿真** - 支持 Arduino、ESP32、STM32
 
-## 🛠️ 技术栈
+### 串口/网络调试
+- **Web 串口助手** - Web Serial API
+- **HTTP 请求构造器** - GET/POST/PUT/DELETE
 
-- **框架**: [Next.js 15](https://nextjs.org/) (App Router + 静态导出)
-- **语言**: [TypeScript](https://www.typescriptlang.org/)
-- **样式**: [Tailwind CSS](https://tailwindcss.com/)
-- **图标**: [Lucide React](https://lucide.dev/)
-- **标准**: IPC-2152 (PCB 设计标准)
+### 进制转换与位操作
+- **ASCII/字符转换**
+- **进制转换器** - 二/八/十/十六进制
+- **单位转换器** - 长度/重量/温度/面积/体积/速度/数据/时间
 
-## 📦 项目结构
+### CRC/校验计算
+- **CRC 计算** - 32 种标准算法
+- **Hash/MD5/SHA** - 多种哈希算法
+- **Base64 编解码**
+- **URL 编解码**
+- **UUID 生成器** - v1/v4 版本
+- **JWT 解码器** - 解析和验证
 
-```
-zutils/
-├── src/
-│   ├── app/                    # Next.js App Router 页面
-│   │   ├── pcb-via-current/    # PCB 过孔电流计算器
-│   │   ├── pcb-trace-width/    # PCB 走线宽度计算器
-│   │   ├── resistor-color-code/# 电阻色环计算器
-│   │   ├── smd-resistor/       # SMD 电阻丝印助手
-│   │   ├── led-resistor/       # LED 限流电阻计算器
-│   │   ├── battery-life/       # 电池续航计算器
-│   │   ├── rc-rl-filter/       # RC/RL 滤波器计算器
-│   │   └── binary-viewer/      # 二进制文件查看器
-│   │
-│   ├── components/
-│   │   ├── ui/                 # 基础 UI 组件
-│   │   ├── layout/             # 布局组件
-│   │   └── tools/              # 工具通用组件
-│   │
-│   ├── lib/
-│   │   ├── calculations/       # 核心计算逻辑
-│   │   └── utils/              # 工具函数
-│   │
-│   ├── types/                  # TypeScript 类型定义
-│   └── config/                 # 配置文件
-│
-├── package.json
-├── tailwind.config.ts
-└── tsconfig.json
-```
+### 开发工具
+- **JSON 格式化** - 美化、压缩、校验
+- **正则表达式测试** - 实时匹配
+- **时间戳转换** - Unix 时间戳
+- **AI 聊天助手** - OpenAI 兼容 API
+- **代码对比** - LCS 算法精确对比
+- **密码生成器** - 安全随机密码
+- **代码片段管理** - 保存和管理代码
+- **Markdown 预览** - 实时渲染
+- **SQL 格式化** - 语句美化
+- **Cron 表达式生成器** - 可视化生成
+- **Git 命令速查** - 常用命令速查表
 
-## 🚀 快速开始
+### 设计工具
+- **颜色选择器** - HEX/RGB/HSL
+- **二维码生成器** - 自定义二维码
+- **图片 Base64 转换** - 互转工具
 
-### 环境要求
+## 技术栈
 
-- Node.js 18.17 或更高版本
-- npm、yarn 或 pnpm
+- **框架**: Next.js 15 (App Router)
+- **语言**: TypeScript
+- **样式**: Tailwind CSS
+- **图标**: Lucide React
+- **部署**: GitHub Pages
 
-### 安装依赖
+## 本地开发
 
 ```bash
+# 安装依赖
 npm install
-```
 
-### 开发模式
-
-```bash
+# 启动开发服务器
 npm run dev
-```
 
-访问 [http://localhost:3000](http://localhost:3000) 查看应用。
-
-### 构建静态版本
-
-```bash
+# 构建静态文件
 npm run build
 ```
 
-静态文件将输出到 `out` 目录。
+## 部署
 
-## 🏗️ 架构设计
-
-### 模块化设计
-
-每个工具独立目录，包含：
-- 页面组件 (`page.tsx`)
-- 计算逻辑 (`lib/calculations/`)
-- 类型定义 (`types/`)
-
-### 可复用组件
-
-- `CalculatorShell`: 统一的计算器 UI 框架
-- `ToolCard`: 工具卡片组件
-- `ColorBandPicker`: 色环选择器
-- `HexViewer`: 十六进制查看器
-- `FrequencyChart`: 频率响应图表
-
-### 类型安全
-
-完整的 TypeScript 类型定义，确保输入输出类型正确。
-
-## 📐 计算标准
-
-### IPC-2152 标准
-
-PCB 过孔和走线电流计算基于 IPC-2152 标准，这是目前业界公认的 PCB 热设计标准。
-
-主要计算公式：
-- 过孔截面积: `A = π × (r² - r_inner²)`
-- 最大电流: `I = k × A^0.44 × (ΔT/10)^0.5`
-- 电阻: `R = ρ × L / A`
-
-## 🚢 部署
-
-### GitHub Pages
-
-项目已配置 GitHub Actions 自动部署到 GitHub Pages。
-
-每次推送到 `main` 分支，会自动构建并部署。
+项目配置了 GitHub Actions 自动部署，推送到 main 分支后自动构建并部署到 GitHub Pages。
 
 ### 手动部署
 
-1. 构建静态文件: `npm run build`
-2. 将 `out` 目录内容部署到任意静态托管服务
+1. 在 GitHub 仓库设置中启用 Pages
+2. 选择 "GitHub Actions" 作为构建源
+3. 推送代码后自动部署
 
-## 🤝 贡献指南
+访问地址: https://xiaowulai-s.github.io/zutils/
 
-欢迎提交 Issue 和 Pull Request！
+## 功能特性
 
-1. Fork 本仓库
-2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
-4. 推送到分支 (`git push origin feature/AmazingFeature`)
-5. 创建 Pull Request
+- 实时搜索过滤
+- 暗色模式切换
+- 工具收藏功能
+- 使用历史记录
+- 键盘快捷键支持
+- PWA 支持
+- 响应式设计
 
-## 📄 许可证
+## 快捷键
 
-本项目采用 MIT 许可证 - 详见 [LICENSE](LICENSE) 文件
+| 快捷键 | 功能 |
+|--------|------|
+| `/` 或 `Ctrl+K` | 聚焦搜索框 |
+| `?` | 显示快捷键帮助 |
 
-## 🙏 致谢
+## 许可证
 
-- [IPC-2152](https://www.ipc.org/) - PCB 设计标准
-- [Next.js](https://nextjs.org/) - React 框架
-- [Tailwind CSS](https://tailwindcss.com/) - CSS 框架
-- [Lucide](https://lucide.dev/) - 图标库
+MIT License

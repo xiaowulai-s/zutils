@@ -29,7 +29,14 @@ import {
   Key,
   Image,
   Link2,
-  Terminal
+  Terminal,
+  Globe,
+  Ruler,
+  Fingerprint,
+  KeyRound,
+  Code2,
+  Database,
+  GitBranch
 } from 'lucide-react'
 import { Card } from '@/components/ui'
 import type { ToolMeta } from '@/types'
@@ -47,6 +54,7 @@ const iconMap: Record<string, React.ReactNode> = {
   'book-open': <BookOpen className="h-6 w-6" />,
   'microchip': <Microchip className="h-6 w-6" />,
   'terminal': <Terminal className="h-6 w-6" />,
+  'globe': <Globe className="h-6 w-6" />,
   'binary': <Binary className="h-6 w-6" />,
   'shield-check': <ShieldCheck className="h-6 w-6" />,
   'lock': <Lock className="h-6 w-6" />,
@@ -62,6 +70,12 @@ const iconMap: Record<string, React.ReactNode> = {
   'key': <Key className="h-6 w-6" />,
   'image': <Image className="h-6 w-6" />,
   'link': <Link2 className="h-6 w-6" />,
+  'ruler': <Ruler className="h-6 w-6" />,
+  'fingerprint': <Fingerprint className="h-6 w-6" />,
+  'key-round': <KeyRound className="h-6 w-6" />,
+  'code-2': <Code2 className="h-6 w-6" />,
+  'database': <Database className="h-6 w-6" />,
+  'git-branch': <GitBranch className="h-6 w-6" />,
 }
 
 interface ToolCardProps {

@@ -2,28 +2,51 @@
 
 import { useState, useMemo } from 'react'
 import { ToolShell } from '@/components/tools'
-import { FileDiff, ArrowLeftRight, RotateCcw } from 'lucide-react'
+import { FileDiff, Copy, Check, RotateCcw, ArrowLeftRight, ChevronDown, ChevronUp } from 'lucide-react'
 
-function computeDiff(oldText: string, newText: string) {
+interface DiffLine {
+  type: 'unchanged' | 'added' | 'removed'
+  oldNum?: number
+  newNum?: number
+  text: string
+}
+
+function diffLines(oldText: string, newText: string): DiffLine[] {
   const oldLines = oldText.split('\n')
   const newLines = newText.split('\n')
+  const result: DiffLine[] = []
   
-  const result: Array<{ type: 'unchanged' | 'added' | 'removed', text: string }> = []
-  const maxLength = Math.max(oldLines.length, newLines.length)
+  const m = oldLines.length
+  const n = newLines.length
   
-  for (let i = 0; i < maxLength; i++) {
-    const oldLine = oldLines[i]
-    const newLine = newLines[i]
-    
-    if (oldLine === undefined && newLine !== undefined) {
-      result.push({ type: 'added', text: newLine })
-    } else if (newLine === undefined && oldLine !== undefined) {
-      result.push({ type: 'removed', text: oldLine })
-    } else if (oldLine === newLine) {
-      result.push({ type: 'unchanged', text: oldLine })
-    } else {
-      result.push({ type: 'removed', text: oldLine })
-      result.push({ type: 'added', text: newLine })
+  const dp: number[][] = Array(m + 1).fill(null).map(() => Array(n + 1).fill(0))
+  
+  for (let i = m - 1; i >= 0; i--) {
+    for (let j = n - 1; j >= 0; j--) {
+      if (oldLines[i] === newLines[j]) {
+        dp[i][j] = dp[i + 1][j + 1] + 1
+      } else {
+        dp[i][j] = Math.max(dp[i + 1][j], dp[i][j + 1])
+      }
+    }
+  }
+  
+  let i = 0, j = 0
+  let oldLineNum = 1, newLineNum = 1
+  
+  while (i < m || j < n) {
+    if (i < m && j < n && oldLines[i] === newLines[j]) {
+      result.push({ type: 'unchanged', oldNum: oldLineNum, newNum: newLineNum, text: oldLines[i] })
+      i++; j++
+      oldLineNum++; newLineNum++
+    } else if (j < n && (i === m || dp[i][j + 1] >= dp[i + 1][j])) {
+      result.push({ type: 'added', newNum: newLineNum, text: newLines[j] })
+      j++
+      newLineNum++
+    } else if (i < m) {
+      result.push({ type: 'removed', oldNum: oldLineNum, text: oldLines[i] })
+      i++
+      oldLineNum++
     }
   }
   
@@ -33,8 +56,22 @@ function computeDiff(oldText: string, newText: string) {
 export default function CodeDiffPage() {
   const [oldText, setOldText] = useState('')
   const [newText, setNewText] = useState('')
+  const [showUnchanged, setShowUnchanged] = useState(true)
+  const [copySuccess, setCopySuccess] = useState(false)
+
+  const diff = useMemo(() => diffLines(oldText, newText), [oldText, newText])
   
-  const diff = useMemo(() => computeDiff(oldText, newText), [oldText, newText])
+  const stats = useMemo(() => {
+    const added = diff.filter(d => d.type === 'added').length
+    const removed = diff.filter(d => d.type === 'removed').length
+    const unchanged = diff.filter(d => d.type === 'unchanged').length
+    return { added, removed, unchanged }
+  }, [diff])
+
+  const filteredDiff = useMemo(() => {
+    if (showUnchanged) return diff
+    return diff.filter(d => d.type !== 'unchanged')
+  }, [diff, showUnchanged])
 
   const clearAll = () => {
     setOldText('')
@@ -45,6 +82,16 @@ export default function CodeDiffPage() {
     const temp = oldText
     setOldText(newText)
     setNewText(temp)
+  }
+
+  const copyDiff = async () => {
+    const text = filteredDiff.map(d => {
+      const prefix = d.type === 'added' ? '+' : d.type === 'removed' ? '-' : ' '
+      return `${prefix} ${d.text}`
+    }).join('\n')
+    await navigator.clipboard.writeText(text)
+    setCopySuccess(true)
+    setTimeout(() => setCopySuccess(false), 2000)
   }
 
   return (
@@ -65,12 +112,22 @@ export default function CodeDiffPage() {
             <RotateCcw className="w-4 h-4" />
             清空
           </button>
+          <label className="flex items-center gap-2 ml-auto">
+            <input
+              type="checkbox"
+              checked={showUnchanged}
+              onChange={(e) => setShowUnchanged(e.target.checked)}
+              className="rounded"
+            />
+            <span className="text-sm">显示未修改行</span>
+          </label>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div>
             <div className="flex items-center justify-between mb-2">
               <span className="text-sm font-medium text-red-600">原始文本</span>
+              <span className="text-xs text-gray-400">{oldText.split('\n').length} 行</span>
             </div>
             <textarea
               value={oldText}
@@ -82,6 +139,7 @@ export default function CodeDiffPage() {
           <div>
             <div className="flex items-center justify-between mb-2">
               <span className="text-sm font-medium text-green-600">新文本</span>
+              <span className="text-xs text-gray-400">{newText.split('\n').length} 行</span>
             </div>
             <textarea
               value={newText}
@@ -92,14 +150,29 @@ export default function CodeDiffPage() {
           </div>
         </div>
 
+        {(stats.added > 0 || stats.removed > 0) && (
+          <div className="flex gap-4 text-sm">
+            <span className="text-green-600">+{stats.added} 添加</span>
+            <span className="text-red-600">-{stats.removed} 删除</span>
+            <span className="text-gray-500">{stats.unchanged} 未修改</span>
+          </div>
+        )}
+
         <div className="border rounded-lg overflow-hidden">
-          <div className="px-4 py-2 bg-gray-50 dark:bg-gray-800 border-b">
+          <div className="px-4 py-2 bg-gray-50 dark:bg-gray-800 border-b flex items-center justify-between">
             <span className="text-sm font-medium">对比结果</span>
+            <button
+              onClick={copyDiff}
+              className="flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700"
+            >
+              {copySuccess ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4" />}
+              复制
+            </button>
           </div>
           <div className="max-h-96 overflow-y-auto">
             <table className="w-full text-sm font-mono">
               <tbody>
-                {diff.map((line, index) => (
+                {filteredDiff.map((line, index) => (
                   <tr
                     key={index}
                     className={
@@ -110,22 +183,25 @@ export default function CodeDiffPage() {
                         : ''
                     }
                   >
-                    <td className="px-4 py-1 text-right text-gray-400 w-12 select-none">
-                      {index + 1}
+                    <td className="px-2 py-0.5 text-right text-gray-400 w-10 select-none text-xs border-r border-gray-200 dark:border-gray-700">
+                      {line.oldNum || ''}
                     </td>
-                    <td className="px-2 py-1 w-8 select-none">
+                    <td className="px-2 py-0.5 text-right text-gray-400 w-10 select-none text-xs border-r border-gray-200 dark:border-gray-700">
+                      {line.newNum || ''}
+                    </td>
+                    <td className="px-2 py-0.5 w-8 select-none">
                       {line.type === 'added' && <span className="text-green-600">+</span>}
                       {line.type === 'removed' && <span className="text-red-600">-</span>}
                       {line.type === 'unchanged' && <span className="text-gray-400"> </span>}
                     </td>
-                    <td className="px-4 py-1 whitespace-pre">
+                    <td className="px-4 py-0.5 whitespace-pre">
                       {line.text}
                     </td>
                   </tr>
                 ))}
-                {diff.length === 0 && (
+                {filteredDiff.length === 0 && (
                   <tr>
-                    <td colSpan={3} className="px-4 py-8 text-center text-gray-500">
+                    <td colSpan={4} className="px-4 py-8 text-center text-gray-500">
                       输入文本以查看差异
                     </td>
                   </tr>
@@ -144,14 +220,6 @@ export default function CodeDiffPage() {
             <div className="w-4 h-4 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded"></div>
             <span className="text-gray-600 dark:text-gray-400">删除</span>
           </div>
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded"></div>
-            <span className="text-gray-600 dark:text-gray-400">不变</span>
-          </div>
-        </div>
-
-        <div className="text-sm text-gray-500 dark:text-gray-400">
-          <p><strong>提示:</strong> 代码对比工具可快速查看两段文本的差异。绿色表示新增内容，红色表示删除内容。</p>
         </div>
       </div>
     </ToolShell>

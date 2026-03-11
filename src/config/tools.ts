@@ -101,6 +101,15 @@ export const tools: ToolMeta[] = [
     keywords: ['串口', 'UART', 'Web Serial', '调试', 'serial']
   },
   {
+    id: 'http-client',
+    name: 'HTTP 请求构造器',
+    description: '构造和发送 HTTP 请求，支持 GET/POST/PUT/DELETE 等方法',
+    category: { id: 'serial', name: '串口/网络调试', icon: 'terminal' },
+    icon: 'globe',
+    path: '/http-client',
+    keywords: ['HTTP', '请求', 'API', 'REST', '调试']
+  },
+  {
     id: 'ascii-converter',
     name: 'ASCII / 字符',
     description: 'ASCII 码与字符相互转换，包含常用 ASCII 字符表',
@@ -117,6 +126,15 @@ export const tools: ToolMeta[] = [
     icon: 'binary',
     path: '/number-converter',
     keywords: ['进制', '二进制', '八进制', '十六进制', '转换']
+  },
+  {
+    id: 'unit-converter',
+    name: '单位转换器',
+    description: '长度、重量、温度、面积、体积、速度、数据存储等常用单位转换',
+    category: { id: 'convert', name: '进制转换与位操作', icon: 'arrows-right-left' },
+    icon: 'ruler',
+    path: '/unit-converter',
+    keywords: ['单位', '转换', '长度', '重量', '温度']
   },
   {
     id: 'crc-calculator',
@@ -153,6 +171,24 @@ export const tools: ToolMeta[] = [
     icon: 'link',
     path: '/url-encoder',
     keywords: ['URL', '编码', '解码', 'encodeURIComponent']
+  },
+  {
+    id: 'uuid-generator',
+    name: 'UUID 生成器',
+    description: '批量生成 UUID/GUID，支持 v1 和 v4 版本',
+    category: { id: 'crc', name: 'CRC/校验计算', icon: 'shield-check' },
+    icon: 'fingerprint',
+    path: '/uuid-generator',
+    keywords: ['UUID', 'GUID', '唯一标识符', '生成器']
+  },
+  {
+    id: 'jwt-decoder',
+    name: 'JWT 解码器',
+    description: '解析和验证 JWT Token，显示 Header、Payload 和签名',
+    category: { id: 'crc', name: 'CRC/校验计算', icon: 'shield-check' },
+    icon: 'key-round',
+    path: '/jwt-decoder',
+    keywords: ['JWT', 'Token', '解码', '验证']
   },
   {
     id: 'json-formatter',
@@ -193,7 +229,7 @@ export const tools: ToolMeta[] = [
   {
     id: 'code-diff',
     name: '代码对比',
-    description: '文本和代码差异对比工具，高亮显示新增和删除内容',
+    description: '文本和代码差异对比工具，使用 LCS 算法精确对比',
     category: { id: 'dev', name: '开发工具', icon: 'code' },
     icon: 'file-diff',
     path: '/code-diff',
@@ -207,6 +243,51 @@ export const tools: ToolMeta[] = [
     icon: 'key',
     path: '/password-generator',
     keywords: ['密码', '生成器', '随机', '安全']
+  },
+  {
+    id: 'snippets',
+    name: '代码片段管理',
+    description: '保存和管理常用代码片段，支持多语言和标签',
+    category: { id: 'dev', name: '开发工具', icon: 'code' },
+    icon: 'code-2',
+    path: '/snippets',
+    keywords: ['代码片段', 'snippet', '收藏', '管理']
+  },
+  {
+    id: 'markdown-preview',
+    name: 'Markdown 预览',
+    description: '实时 Markdown 渲染预览，支持常用语法',
+    category: { id: 'dev', name: '开发工具', icon: 'code' },
+    icon: 'file-text',
+    path: '/markdown-preview',
+    keywords: ['Markdown', '预览', '渲染', '编辑器']
+  },
+  {
+    id: 'sql-formatter',
+    name: 'SQL 格式化',
+    description: 'SQL 语句美化和格式化，关键字自动大写',
+    category: { id: 'dev', name: '开发工具', icon: 'code' },
+    icon: 'database',
+    path: '/sql-formatter',
+    keywords: ['SQL', '格式化', '美化', '数据库']
+  },
+  {
+    id: 'cron-generator',
+    name: 'Cron 表达式生成器',
+    description: '可视化生成 Cron 表达式，显示下次执行时间',
+    category: { id: 'dev', name: '开发工具', icon: 'code' },
+    icon: 'clock',
+    path: '/cron-generator',
+    keywords: ['Cron', '定时任务', '表达式', '生成器']
+  },
+  {
+    id: 'git-cheatsheet',
+    name: 'Git 命令速查',
+    description: '常用 Git 命令速查表，支持搜索和一键复制',
+    category: { id: 'dev', name: '开发工具', icon: 'code' },
+    icon: 'git-branch',
+    path: '/git-cheatsheet',
+    keywords: ['Git', '命令', '速查', 'cheatsheet']
   },
   {
     id: 'color-picker',
