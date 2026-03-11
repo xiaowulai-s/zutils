@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { Menu, X, Zap } from 'lucide-react'
 import { useState } from 'react'
+import { ThemeToggle } from '@/components/ThemeToggle'
 
 const navItems = [
   { label: '硬件/PCB', href: '/#pcb' },
@@ -33,16 +34,19 @@ export function Header() {
           ))}
         </nav>
         
-        <button
-          className="md:hidden"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        >
-          {mobileMenuOpen ? (
-            <X className="h-6 w-6" />
-          ) : (
-            <Menu className="h-6 w-6" />
-          )}
-        </button>
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <button
+            className="md:hidden"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            {mobileMenuOpen ? (
+              <X className="h-6 w-6" />
+            ) : (
+              <Menu className="h-6 w-6" />
+            )}
+          </button>
+        </div>
       </div>
       
       {mobileMenuOpen && (
