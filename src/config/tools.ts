@@ -110,9 +110,18 @@ export const tools: ToolMeta[] = [
     keywords: ['ASCII', '字符', '转换', '字符码', 'character']
   },
   {
+    id: 'number-converter',
+    name: '进制转换器',
+    description: '二进制、八进制、十进制、十六进制相互转换',
+    category: { id: 'convert', name: '进制转换与位操作', icon: 'arrows-right-left' },
+    icon: 'binary',
+    path: '/number-converter',
+    keywords: ['进制', '二进制', '八进制', '十六进制', '转换']
+  },
+  {
     id: 'crc-calculator',
     name: 'CRC 计算',
-    description: '支持多种 CRC 算法的校验和计算工具',
+    description: '支持 32 种标准 CRC 算法的校验和计算工具',
     category: { id: 'crc', name: 'CRC/校验计算', icon: 'shield-check' },
     icon: 'shield-check',
     path: '/crc-calculator',
@@ -137,22 +146,40 @@ export const tools: ToolMeta[] = [
     keywords: ['Base64', '编码', '解码', 'encode', 'decode']
   },
   {
-    id: 'color-picker',
-    name: '颜色选择器',
-    description: '颜色选择和转换工具，支持 HEX、RGB、HSL 格式',
-    category: { id: 'design', name: '设计工具', icon: 'palette' },
-    icon: 'palette',
-    path: '/color-picker',
-    keywords: ['颜色', '选择器', 'HEX', 'RGB', 'HSL']
+    id: 'url-encoder',
+    name: 'URL 编解码',
+    description: 'URL 编码和解码工具，支持特殊字符转换',
+    category: { id: 'crc', name: 'CRC/校验计算', icon: 'shield-check' },
+    icon: 'link',
+    path: '/url-encoder',
+    keywords: ['URL', '编码', '解码', 'encodeURIComponent']
   },
   {
-    id: 'datasheet',
-    name: '芯片手册查询',
-    description: '电子元器件 datasheet 数据手册查询下载，支持数百万种芯片规格书',
-    category: { id: 'more', name: '更多工具', icon: 'book-open' },
-    icon: 'book-open',
-    path: '/datasheet',
-    keywords: ['datasheet', '数据手册', '芯片', '规格书']
+    id: 'json-formatter',
+    name: 'JSON 格式化',
+    description: 'JSON 美化、压缩和校验工具，支持语法错误检测',
+    category: { id: 'dev', name: '开发工具', icon: 'code' },
+    icon: 'braces',
+    path: '/json-formatter',
+    keywords: ['JSON', '格式化', '美化', '压缩', '校验']
+  },
+  {
+    id: 'regex-tester',
+    name: '正则表达式测试',
+    description: '实时正则表达式匹配测试工具，支持多种模式',
+    category: { id: 'dev', name: '开发工具', icon: 'code' },
+    icon: 'regex',
+    path: '/regex-tester',
+    keywords: ['正则', '正则表达式', 'regex', '匹配', '测试']
+  },
+  {
+    id: 'timestamp-converter',
+    name: '时间戳转换',
+    description: 'Unix 时间戳与日期时间相互转换，实时显示当前时间戳',
+    category: { id: 'dev', name: '开发工具', icon: 'code' },
+    icon: 'clock',
+    path: '/timestamp-converter',
+    keywords: ['时间戳', 'timestamp', '日期', '时间', 'Unix']
   },
   {
     id: 'ai-chat',
@@ -171,6 +198,51 @@ export const tools: ToolMeta[] = [
     icon: 'file-diff',
     path: '/code-diff',
     keywords: ['代码对比', 'diff', '差异', '文本对比']
+  },
+  {
+    id: 'password-generator',
+    name: '密码生成器',
+    description: '安全随机密码生成工具，支持自定义长度和字符类型',
+    category: { id: 'dev', name: '开发工具', icon: 'code' },
+    icon: 'key',
+    path: '/password-generator',
+    keywords: ['密码', '生成器', '随机', '安全']
+  },
+  {
+    id: 'color-picker',
+    name: '颜色选择器',
+    description: '颜色选择和转换工具，支持 HEX、RGB、HSL 格式',
+    category: { id: 'design', name: '设计工具', icon: 'palette' },
+    icon: 'palette',
+    path: '/color-picker',
+    keywords: ['颜色', '选择器', 'HEX', 'RGB', 'HSL']
+  },
+  {
+    id: 'qr-generator',
+    name: '二维码生成器',
+    description: '生成自定义二维码，支持文本、网址、WiFi 等内容',
+    category: { id: 'design', name: '设计工具', icon: 'palette' },
+    icon: 'qr-code',
+    path: '/qr-generator',
+    keywords: ['二维码', 'QR', '生成器', '扫码']
+  },
+  {
+    id: 'image-base64',
+    name: '图片 Base64 转换',
+    description: '图片与 Base64 编码相互转换，支持粘贴和下载',
+    category: { id: 'design', name: '设计工具', icon: 'palette' },
+    icon: 'image',
+    path: '/image-base64',
+    keywords: ['图片', 'Base64', '转换', '编码']
+  },
+  {
+    id: 'datasheet',
+    name: '芯片手册查询',
+    description: '电子元器件 datasheet 数据手册查询下载，支持数百万种芯片规格书',
+    category: { id: 'more', name: '更多工具', icon: 'book-open' },
+    icon: 'book-open',
+    path: '/datasheet',
+    keywords: ['datasheet', '数据手册', '芯片', '规格书']
   },
 ]
 

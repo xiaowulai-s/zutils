@@ -26,7 +26,16 @@ import {
   Clock,
   Calculator,
   Palette,
-  QrCode
+  QrCode,
+  Binary,
+  Braces,
+  Regex,
+  Key,
+  Image,
+  Link2,
+  Star,
+  History,
+  Heart
 } from 'lucide-react'
 import { tools } from '@/config/tools'
 
@@ -58,6 +67,15 @@ const iconMap: Record<string, React.ReactNode> = {
   'qr-code': <QrCode className="h-4 w-4" />,
   'code': <FileCode className="h-4 w-4" />,
   'arrows-right-left': <ArrowRightLeft className="h-4 w-4" />,
+  'binary': <Binary className="h-4 w-4" />,
+  'braces': <Braces className="h-4 w-4" />,
+  'regex': <Regex className="h-4 w-4" />,
+  'key': <Key className="h-4 w-4" />,
+  'image': <Image className="h-4 w-4" />,
+  'link': <Link2 className="h-4 w-4" />,
+  'star': <Star className="h-4 w-4" />,
+  'history': <History className="h-4 w-4" />,
+  'heart': <Heart className="h-4 w-4" />,
 }
 
 export function Sidebar() {

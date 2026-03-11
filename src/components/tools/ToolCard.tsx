@@ -1,3 +1,5 @@
+'use client'
+
 import Link from 'next/link'
 import { 
   Cpu, 
@@ -10,10 +12,28 @@ import {
   FileCode,
   BookOpen,
   Microchip,
-  ChevronRight
+  ChevronRight,
+  Heart,
+  Binary,
+  ShieldCheck,
+  Lock,
+  ArrowRightLeft,
+  Type,
+  Clock,
+  Sparkles,
+  FileDiff,
+  Palette,
+  QrCode,
+  Braces,
+  Regex,
+  Key,
+  Image,
+  Link2,
+  Terminal
 } from 'lucide-react'
 import { Card } from '@/components/ui'
 import type { ToolMeta } from '@/types'
+import { useUserPreferences } from '@/components/UserPreferences'
 
 const iconMap: Record<string, React.ReactNode> = {
   'cpu': <Cpu className="h-6 w-6" />,
@@ -26,6 +46,22 @@ const iconMap: Record<string, React.ReactNode> = {
   'file-binary': <FileCode className="h-6 w-6" />,
   'book-open': <BookOpen className="h-6 w-6" />,
   'microchip': <Microchip className="h-6 w-6" />,
+  'terminal': <Terminal className="h-6 w-6" />,
+  'binary': <Binary className="h-6 w-6" />,
+  'shield-check': <ShieldCheck className="h-6 w-6" />,
+  'lock': <Lock className="h-6 w-6" />,
+  'arrow-right-left': <ArrowRightLeft className="h-6 w-6" />,
+  'type': <Type className="h-6 w-6" />,
+  'clock': <Clock className="h-6 w-6" />,
+  'sparkles': <Sparkles className="h-6 w-6" />,
+  'file-diff': <FileDiff className="h-6 w-6" />,
+  'palette': <Palette className="h-6 w-6" />,
+  'qr-code': <QrCode className="h-6 w-6" />,
+  'braces': <Braces className="h-6 w-6" />,
+  'regex': <Regex className="h-6 w-6" />,
+  'key': <Key className="h-6 w-6" />,
+  'image': <Image className="h-6 w-6" />,
+  'link': <Link2 className="h-6 w-6" />,
 }
 
 interface ToolCardProps {
@@ -33,11 +69,31 @@ interface ToolCardProps {
 }
 
 export function ToolCard({ tool }: ToolCardProps) {
+  const { toggleFavorite, isFavorite } = useUserPreferences()
+  const favorite = isFavorite(tool.id)
+
+  const handleFavoriteClick = (e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    toggleFavorite(tool.id)
+  }
+
   return (
     <Link href={tool.path}>
-      <Card className="h-full hover:shadow-md transition-shadow cursor-pointer group">
+      <Card className="h-full hover:shadow-md transition-shadow cursor-pointer group relative">
+        <button
+          onClick={handleFavoriteClick}
+          className={`absolute top-3 right-3 p-1.5 rounded-full transition-colors z-10 ${
+            favorite 
+              ? 'text-red-500 bg-red-50 dark:bg-red-900/30' 
+              : 'text-gray-300 hover:text-red-500 hover:bg-gray-100 dark:hover:bg-gray-800'
+          }`}
+          title={favorite ? '取消收藏' : '添加收藏'}
+        >
+          <Heart className={`h-4 w-4 ${favorite ? 'fill-current' : ''}`} />
+        </button>
         <div className="p-6">
-          <div className="flex items-start justify-between">
+          <div className="flex items-start justify-between pr-8">
             <div className="flex items-center gap-3">
               <div className="p-2 rounded-lg bg-primary/10 text-primary">
                 {iconMap[tool.icon]}
@@ -51,7 +107,6 @@ export function ToolCard({ tool }: ToolCardProps) {
                 </p>
               </div>
             </div>
-            <ChevronRight className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
           </div>
           <p className="mt-3 text-sm text-muted-foreground line-clamp-2">
             {tool.description}
