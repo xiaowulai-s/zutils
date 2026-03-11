@@ -24,9 +24,12 @@ export function FrequencyChart({ data, type }: FrequencyChartProps) {
         label: d.frequency
       }))
   
-  const yValues = chartData.map(d => d.y)
-  const minY = Math.min(...yValues)
-  const maxY = Math.max(...yValues)
+  let minY = chartData[0].y
+  let maxY = chartData[0].y
+  for (let i = 1; i < chartData.length; i++) {
+    if (chartData[i].y < minY) minY = chartData[i].y
+    if (chartData[i].y > maxY) maxY = chartData[i].y
+  }
   const rangeY = maxY - minY || 1
   
   const width = 400
@@ -47,7 +50,7 @@ export function FrequencyChart({ data, type }: FrequencyChartProps) {
   
   return (
     <div className="w-full">
-      <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-auto">
+      <svg viewBox={'0 0 ' + width + ' ' + height} className="w-full h-auto">
         <rect
           x={padding.left}
           y={padding.top}
@@ -96,7 +99,7 @@ export function FrequencyChart({ data, type }: FrequencyChartProps) {
           x={15}
           y={padding.top + chartHeight / 2}
           textAnchor="middle"
-          transform={`rotate(-90, 15, ${padding.top + chartHeight / 2})`}
+          transform={'rotate(-90, 15, ' + (padding.top + chartHeight / 2) + ')'}
           className="text-xs fill-muted-foreground"
         >
           {type === 'magnitude' ? '增益' : '相位 (°)'}
@@ -106,7 +109,7 @@ export function FrequencyChart({ data, type }: FrequencyChartProps) {
       <div className="flex justify-between text-xs text-muted-foreground mt-2 px-12">
         {points.slice(0, 5).map((p, i) => (
           <span key={i}>
-            {p.label < 1000 ? `${Math.round(p.label)} Hz` : `${Math.round(p.label / 1000)} kHz`}
+            {p.label < 1000 ? Math.round(p.label) + ' Hz' : Math.round(p.label / 1000) + ' kHz'}
           </span>
         ))}
       </div>

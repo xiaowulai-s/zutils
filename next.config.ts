@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
     unoptimized: true,
   },
   trailingSlash: true,
-  basePath: '/zutils',
+  basePath: process.env.NODE_ENV === 'production' ? '/zutils' : '',
 };
 
 export default nextConfig;
