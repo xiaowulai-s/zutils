@@ -41,7 +41,12 @@ import {
   KeyRound,
   Code2,
   Database,
-  GitBranch
+  GitBranch,
+  Radio,
+  Contrast,
+  ImageDown,
+  Shuffle,
+  TextCursor
 } from 'lucide-react'
 import { tools } from '@/config/tools'
 
@@ -88,6 +93,12 @@ const iconMap: Record<string, React.ReactNode> = {
   'code-2': <Code2 className="h-4 w-4" />,
   'database': <Database className="h-4 w-4" />,
   'git-branch': <GitBranch className="h-4 w-4" />,
+  'radio': <Radio className="h-4 w-4" />,
+  'contrast': <Contrast className="h-4 w-4" />,
+  'image-down': <ImageDown className="h-4 w-4" />,
+  'shuffle': <Shuffle className="h-4 w-4" />,
+  'text-cursor': <TextCursor className="h-4 w-4" />,
+  'file-code': <FileCode className="h-4 w-4" />,
 }
 
 export function Sidebar() {

@@ -110,6 +110,15 @@ export const tools: ToolMeta[] = [
     keywords: ['HTTP', '请求', 'API', 'REST', '调试']
   },
   {
+    id: 'websocket-tester',
+    name: 'WebSocket 测试',
+    description: 'WebSocket 连接测试工具，支持消息收发和实时通信',
+    category: { id: 'serial', name: '串口/网络调试', icon: 'terminal' },
+    icon: 'radio',
+    path: '/websocket-tester',
+    keywords: ['WebSocket', 'WS', '实时通信', '测试']
+  },
+  {
     id: 'ascii-converter',
     name: 'ASCII / 字符',
     description: 'ASCII 码与字符相互转换，包含常用 ASCII 字符表',
@@ -236,6 +245,15 @@ export const tools: ToolMeta[] = [
     keywords: ['代码对比', 'diff', '差异', '文本对比']
   },
   {
+    id: 'text-diff',
+    name: '文本差异对比',
+    description: '字符级和单词级文本差异高亮对比工具',
+    category: { id: 'dev', name: '开发工具', icon: 'code' },
+    icon: 'text-cursor',
+    path: '/text-diff',
+    keywords: ['文本差异', 'diff', '字符对比', '高亮']
+  },
+  {
     id: 'password-generator',
     name: '密码生成器',
     description: '安全随机密码生成工具，支持自定义长度和字符类型',
@@ -272,6 +290,24 @@ export const tools: ToolMeta[] = [
     keywords: ['SQL', '格式化', '美化', '数据库']
   },
   {
+    id: 'html-formatter',
+    name: 'HTML 格式化',
+    description: 'HTML 代码美化和格式化，自动处理缩进',
+    category: { id: 'dev', name: '开发工具', icon: 'code' },
+    icon: 'code',
+    path: '/html-formatter',
+    keywords: ['HTML', '格式化', '美化', '网页']
+  },
+  {
+    id: 'yaml-formatter',
+    name: 'YAML 格式化',
+    description: 'YAML 配置文件美化和校验',
+    category: { id: 'dev', name: '开发工具', icon: 'code' },
+    icon: 'file-code',
+    path: '/yaml-formatter',
+    keywords: ['YAML', '格式化', '配置', '校验']
+  },
+  {
     id: 'cron-generator',
     name: 'Cron 表达式生成器',
     description: '可视化生成 Cron 表达式，显示下次执行时间',
@@ -290,6 +326,24 @@ export const tools: ToolMeta[] = [
     keywords: ['Git', '命令', '速查', 'cheatsheet']
   },
   {
+    id: 'random-data',
+    name: '随机数据生成',
+    description: '生成测试数据，支持姓名、邮箱、手机号、地址等',
+    category: { id: 'dev', name: '开发工具', icon: 'code' },
+    icon: 'shuffle',
+    path: '/random-data',
+    keywords: ['随机', '测试数据', '生成器', 'mock']
+  },
+  {
+    id: 'lorem-ipsum',
+    name: 'Lorem Ipsum 生成',
+    description: '生成占位文本，支持拉丁文和中文',
+    category: { id: 'dev', name: '开发工具', icon: 'code' },
+    icon: 'type',
+    path: '/lorem-ipsum',
+    keywords: ['Lorem', '占位文本', '生成器', '中文']
+  },
+  {
     id: 'color-picker',
     name: '颜色选择器',
     description: '颜色选择和转换工具，支持 HEX、RGB、HSL 格式',
@@ -297,6 +351,15 @@ export const tools: ToolMeta[] = [
     icon: 'palette',
     path: '/color-picker',
     keywords: ['颜色', '选择器', 'HEX', 'RGB', 'HSL']
+  },
+  {
+    id: 'color-contrast',
+    name: '颜色对比度检测',
+    description: '根据 WCAG 标准检测颜色对比度是否满足无障碍要求',
+    category: { id: 'design', name: '设计工具', icon: 'palette' },
+    icon: 'contrast',
+    path: '/color-contrast',
+    keywords: ['颜色', '对比度', 'WCAG', '无障碍']
   },
   {
     id: 'qr-generator',
@@ -315,6 +378,15 @@ export const tools: ToolMeta[] = [
     icon: 'image',
     path: '/image-base64',
     keywords: ['图片', 'Base64', '转换', '编码']
+  },
+  {
+    id: 'image-compressor',
+    name: '图片压缩',
+    description: '在浏览器本地压缩图片，支持自定义质量',
+    category: { id: 'design', name: '设计工具', icon: 'palette' },
+    icon: 'image-down',
+    path: '/image-compressor',
+    keywords: ['图片', '压缩', '优化', '减小体积']
   },
   {
     id: 'datasheet',

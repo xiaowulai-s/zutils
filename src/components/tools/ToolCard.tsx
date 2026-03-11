@@ -12,7 +12,6 @@ import {
   FileCode,
   BookOpen,
   Microchip,
-  ChevronRight,
   Heart,
   Binary,
   ShieldCheck,
@@ -36,7 +35,12 @@ import {
   KeyRound,
   Code2,
   Database,
-  GitBranch
+  GitBranch,
+  Radio,
+  Contrast,
+  ImageDown,
+  Shuffle,
+  TextCursor
 } from 'lucide-react'
 import { Card } from '@/components/ui'
 import type { ToolMeta } from '@/types'
@@ -76,6 +80,13 @@ const iconMap: Record<string, React.ReactNode> = {
   'code-2': <Code2 className="h-6 w-6" />,
   'database': <Database className="h-6 w-6" />,
   'git-branch': <GitBranch className="h-6 w-6" />,
+  'radio': <Radio className="h-6 w-6" />,
+  'contrast': <Contrast className="h-6 w-6" />,
+  'image-down': <ImageDown className="h-6 w-6" />,
+  'shuffle': <Shuffle className="h-6 w-6" />,
+  'text-cursor': <TextCursor className="h-6 w-6" />,
+  'file-code': <FileCode className="h-6 w-6" />,
+  'code': <FileCode className="h-6 w-6" />,
 }
 
 interface ToolCardProps {
