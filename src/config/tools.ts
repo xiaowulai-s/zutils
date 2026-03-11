@@ -154,6 +154,24 @@ export const tools: ToolMeta[] = [
     path: '/datasheet',
     keywords: ['datasheet', '数据手册', '芯片', '规格书']
   },
+  {
+    id: 'ai-chat',
+    name: 'AI 聊天助手',
+    description: '智能 AI 对话助手，支持 OpenAI 兼容 API，可配置自定义接口',
+    category: { id: 'dev', name: '开发工具', icon: 'code' },
+    icon: 'sparkles',
+    path: '/ai-chat',
+    keywords: ['AI', '聊天', 'ChatGPT', 'GPT', '对话']
+  },
+  {
+    id: 'code-diff',
+    name: '代码对比',
+    description: '文本和代码差异对比工具，高亮显示新增和删除内容',
+    category: { id: 'dev', name: '开发工具', icon: 'code' },
+    icon: 'file-diff',
+    path: '/code-diff',
+    keywords: ['代码对比', 'diff', '差异', '文本对比']
+  },
 ]
 
 export const toolsByCategory = tools.reduce((acc, tool) => {
