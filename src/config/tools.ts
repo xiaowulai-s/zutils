@@ -92,6 +92,60 @@ export const tools: ToolMeta[] = [
     keywords: ['仿真', 'Arduino', 'ESP32', 'STM32', 'Wokwi']
   },
   {
+    id: 'web-serial',
+    name: 'Web 串口助手',
+    description: '在线串口调试工具，支持 Web Serial API，可直接与串口设备通信',
+    category: { id: 'serial', name: '串口/网络调试', icon: 'terminal' },
+    icon: 'terminal',
+    path: '/web-serial',
+    keywords: ['串口', 'UART', 'Web Serial', '调试', 'serial']
+  },
+  {
+    id: 'ascii-converter',
+    name: 'ASCII / 字符',
+    description: 'ASCII 码与字符相互转换，包含常用 ASCII 字符表',
+    category: { id: 'convert', name: '进制转换与位操作', icon: 'arrows-right-left' },
+    icon: 'type',
+    path: '/ascii-converter',
+    keywords: ['ASCII', '字符', '转换', '字符码', 'character']
+  },
+  {
+    id: 'crc-calculator',
+    name: 'CRC 计算',
+    description: '支持多种 CRC 算法的校验和计算工具',
+    category: { id: 'crc', name: 'CRC/校验计算', icon: 'shield-check' },
+    icon: 'shield-check',
+    path: '/crc-calculator',
+    keywords: ['CRC', '校验', 'checksum', '循环冗余校验']
+  },
+  {
+    id: 'hash-calculator',
+    name: 'Hash / MD5 / SHA',
+    description: '支持 MD5、SHA-1、SHA-256、SHA-384、SHA-512 等哈希算法',
+    category: { id: 'crc', name: 'CRC/校验计算', icon: 'shield-check' },
+    icon: 'lock',
+    path: '/hash-calculator',
+    keywords: ['Hash', 'MD5', 'SHA', '哈希', '加密']
+  },
+  {
+    id: 'base64',
+    name: 'Base64 编解码',
+    description: 'Base64 编码和解码工具，支持文本和文件',
+    category: { id: 'crc', name: 'CRC/校验计算', icon: 'shield-check' },
+    icon: 'arrow-right-left',
+    path: '/base64',
+    keywords: ['Base64', '编码', '解码', 'encode', 'decode']
+  },
+  {
+    id: 'color-picker',
+    name: '颜色选择器',
+    description: '颜色选择和转换工具，支持 HEX、RGB、HSL 格式',
+    category: { id: 'design', name: '设计工具', icon: 'palette' },
+    icon: 'palette',
+    path: '/color-picker',
+    keywords: ['颜色', '选择器', 'HEX', 'RGB', 'HSL']
+  },
+  {
     id: 'datasheet',
     name: '芯片手册查询',
     description: '电子元器件 datasheet 数据手册查询下载，支持数百万种芯片规格书',

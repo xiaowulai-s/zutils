@@ -11,7 +11,22 @@ import {
   Filter,
   FileCode,
   BookOpen,
-  Microchip
+  Microchip,
+  Terminal,
+  Globe,
+  FileJson,
+  FileDiff,
+  FileText,
+  FileType,
+  Sparkles,
+  ShieldCheck,
+  Lock,
+  ArrowRightLeft,
+  Type,
+  Clock,
+  Calculator,
+  Palette,
+  QrCode
 } from 'lucide-react'
 import { tools } from '@/config/tools'
 
@@ -26,6 +41,23 @@ const iconMap: Record<string, React.ReactNode> = {
   'file-binary': <FileCode className="h-4 w-4" />,
   'book-open': <BookOpen className="h-4 w-4" />,
   'microchip': <Microchip className="h-4 w-4" />,
+  'terminal': <Terminal className="h-4 w-4" />,
+  'globe': <Globe className="h-4 w-4" />,
+  'file-json': <FileJson className="h-4 w-4" />,
+  'file-diff': <FileDiff className="h-4 w-4" />,
+  'file-text': <FileText className="h-4 w-4" />,
+  'file-type': <FileType className="h-4 w-4" />,
+  'sparkles': <Sparkles className="h-4 w-4" />,
+  'shield-check': <ShieldCheck className="h-4 w-4" />,
+  'lock': <Lock className="h-4 w-4" />,
+  'arrow-right-left': <ArrowRightLeft className="h-4 w-4" />,
+  'type': <Type className="h-4 w-4" />,
+  'clock': <Clock className="h-4 w-4" />,
+  'calculator': <Calculator className="h-4 w-4" />,
+  'palette': <Palette className="h-4 w-4" />,
+  'qr-code': <QrCode className="h-4 w-4" />,
+  'code': <FileCode className="h-4 w-4" />,
+  'arrows-right-left': <ArrowRightLeft className="h-4 w-4" />,
 }
 
 export function Sidebar() {

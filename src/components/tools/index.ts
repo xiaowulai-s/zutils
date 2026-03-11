@@ -1,5 +1,6 @@
 export { ToolCard } from './ToolCard'
 export { CalculatorShell } from './CalculatorShell'
+export { ToolShell } from './ToolShell'
 export { ColorBandPicker } from './shared/ColorBandPicker'
 export { HexViewer } from './shared/HexViewer'
 export { FrequencyChart } from './shared/FrequencyChart'
